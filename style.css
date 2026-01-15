@@ -461,3 +461,25 @@ button {
         grid-template-columns: 1fr;
     }
 }
+
+@keyframes wiggle {
+
+    0%,
+    100% {
+        transform: rotate(-15deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(15deg) scale(1.1);
+    }
+}
+
+.cute-icon {
+    width: 32px !important;
+    height: 32px !important;
+    color: var(--secondary);
+    margin-left: 10px;
+    animation: wiggle 2s ease-in-out infinite;
+    stroke-width: 2.5px;
+    vertical-align: middle;
+}
