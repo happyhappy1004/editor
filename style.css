@@ -1,0 +1,463 @@
+:root {
+    /* Colorful Palette */
+    --primary: #6366f1;
+    /* Indigo */
+    --primary-hover: #4f46e5;
+    --secondary: #ec4899;
+    /* Pink */
+    --bg-color: #f0fdf4;
+    /* Mint Cream Light */
+
+    /* Section Colors */
+    --color-bg: #3b82f6;
+    /* Blue */
+    --color-bg-light: #eff6ff;
+    --color-evi: #10b981;
+    /* Emerald */
+    --color-evi-light: #ecfdf5;
+    --color-arg: #f43f5e;
+    /* Rose */
+    --color-arg-light: #fff1f2;
+    --color-fact: #8b5cf6;
+    /* Violet */
+    --color-fact-light: #f5f3ff;
+
+    --text-main: #1f2937;
+    --text-sub: #6b7280;
+    --card-bg: #ffffff;
+    --border: #e5e7eb;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-colored: 0 10px 25px -5px rgba(99, 102, 241, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 50px;
+    overflow-x: hidden;
+}
+
+/* Dynamic Background Bubbles */
+.background-glob {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 60%);
+    filter: blur(40px);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Styling */
+header {
+    text-align: center;
+    padding: 3rem 0;
+    position: relative;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.5rem;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+.logo i {
+    color: var(--primary);
+    width: 36px;
+    height: 36px;
+}
+
+header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    letter-spacing: -0.03em;
+}
+
+/* Search Section - Glassmorphism */
+.search-section {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    padding: 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-colored);
+    width: 100%;
+    max-width: 800px;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.3);
+    border-color: var(--primary);
+}
+
+.select-wrapper {
+    position: relative;
+    min-width: 140px;
+}
+
+select {
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background-color: #f3f4f6;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: background 0.2s;
+    appearance: none;
+}
+
+select:hover {
+    background-color: #e5e7eb;
+}
+
+select:focus {
+    outline: none;
+    background-color: white;
+    border-color: var(--primary);
+}
+
+.select-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--text-sub);
+    pointer-events: none;
+}
+
+.input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-sub);
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background-color: #f3f4f6;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    background-color: white;
+    border-color: var(--primary);
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#searchBtn {
+    padding: 0 28px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-weight: 700;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.3);
+}
+
+#searchBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(99, 102, 241, 0.4);
+}
+
+#searchBtn:active {
+    transform: scale(0.95);
+}
+
+#resetBtn {
+    width: 48px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-sub);
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+}
+
+#resetBtn:hover {
+    background: #fee2e2;
+    color: #ef4444;
+    border-color: #fecaca;
+    transform: rotate(-90deg);
+}
+
+/* Back Link Button */
+.back-button-container {
+    text-align: center;
+    margin-top: -1rem;
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    border: 2px solid transparent;
+}
+
+.btn-back:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--color-bg-light);
+}
+
+/* Results Grid */
+.results-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* Masonry-like grid */
+    gap: 24px;
+    padding-top: 1rem;
+}
+
+/* Card Styling - Colorful & Interactive */
+.editorial-card {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.editorial-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+    border-color: white;
+    z-index: 10;
+}
+
+/* Card top decoration line */
+.editorial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--color-bg), var(--color-evi), var(--color-arg), var(--color-fact));
+}
+
+.card-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed #f3f4f6;
+}
+
+.card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+    word-break: keep-all;
+}
+
+.card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-sub);
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f9fafb;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* Structure Blocks - Colorful */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.section-block {
+    padding: 12px 16px;
+    border-radius: 16px;
+    transition: transform 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.section-block:hover {
+    transform: translateX(4px);
+}
+
+/* Color Coding for Sections */
+.section-block.background {
+    background-color: var(--color-bg-light);
+    border-color: rgba(59, 130, 246, 0.1);
+}
+
+.section-block.background .section-label {
+    color: var(--color-bg);
+}
+
+.section-block.evidence {
+    background-color: var(--color-evi-light);
+    border-color: rgba(16, 185, 129, 0.1);
+}
+
+.section-block.evidence .section-label {
+    color: var(--color-evi);
+}
+
+.section-block.argument {
+    background-color: var(--color-arg-light);
+    border-color: rgba(244, 63, 94, 0.1);
+}
+
+.section-block.argument .section-label {
+    color: var(--color-arg);
+}
+
+.section-block.fact {
+    background-color: var(--color-fact-light);
+    border-color: rgba(139, 92, 246, 0.1);
+}
+
+.section-block.fact .section-label {
+    color: var(--color-fact);
+}
+
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Icons for sections are added via CSS/Script or just keep explicit labels */
+
+.section-text {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.6;
+}
+
+/* Empty State */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    color: var(--text-sub);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .search-box {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .select-wrapper,
+    .input-wrapper,
+    #searchBtn {
+        width: 100%;
+    }
+
+    .results-section {
+        grid-template-columns: 1fr;
+    }
+}
