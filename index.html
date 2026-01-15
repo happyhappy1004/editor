@@ -73,7 +73,7 @@
         <header>
             <div class="logo">
                 <i data-lucide="newspaper"></i>
-                <h1>E-Editorial <span class="accent">Archive</span></h1>
+                <h1>신문 사설 <span class="accent">검색기</span></h1>
             </div>
         </header>
 
@@ -154,18 +154,37 @@
             render(editorialsData);
         }
 
+        function toggleContent(id, btn) {
+            const content = document.getElementById(`content-${id}`);
+            const isHidden = content.style.display === 'none';
+
+            content.style.display = isHidden ? 'flex' : 'none';
+
+            // Icon rotation logic
+            const icon = btn.querySelector('svg');
+            if (icon) {
+                icon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+                icon.style.transition = 'transform 0.3s ease';
+            }
+        }
+
         function render(items) {
             const area = document.getElementById('resultsArea');
             area.innerHTML = items.length ? items.map(item => `
                 <article class="editorial-card">
-                    <div class="card-header">
-                        <h2 class="card-title">${item.title}</h2>
-                        <div class="card-meta">
-                            <span class="meta-item"><i data-lucide="user" size="14"></i> ${item.author}</span>
-                            <span class="meta-item"><i data-lucide="calendar" size="14"></i> ${item.date}</span>
+                    <div class="card-header" onclick="toggleContent('${item.id}', this.querySelector('.toggle-btn'))" style="cursor: pointer;">
+                        <div class="header-main" style="flex: 1;">
+                            <h2 class="card-title">${item.title}</h2>
+                            <div class="card-meta">
+                                <span class="meta-item"><i data-lucide="user" size="14"></i> ${item.author}</span>
+                                <span class="meta-item"><i data-lucide="calendar" size="14"></i> ${item.date}</span>
+                            </div>
                         </div>
+                        <button class="toggle-btn" aria-label="내용 보기" style="background: none; border: none; cursor: pointer; padding: 8px;">
+                            <i data-lucide="chevron-down"></i>
+                        </button>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content" id="content-${item.id}" style="display: none;">
                         <div class="section-block background"><div class="section-label">배경</div><p class="section-text">${item.structure.background}</p></div>
                         <div class="section-block evidence"><div class="section-label">근거</div><p class="section-text">${item.structure.evidence}</p></div>
                         <div class="section-block argument"><div class="section-label">주장</div><p class="section-text">${item.structure.argument}</p></div>
